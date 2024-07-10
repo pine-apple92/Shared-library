@@ -4,7 +4,6 @@ def call(String yamlFilePath = 'jenkins.yml') {
 
     // build 섹션의 명령어 실행
     if (yaml.build) {
-        sh "cd ${WORKSPACE}"
         sh "chmod 777 ./*"
         yaml.build.each { command ->
             sh command
