@@ -34,7 +34,7 @@ def call() {
                 steps{
                     //def mvn = tool 'Default Maven';
                     withSonarQubeEnv('sonar') {
-                        sh "cd ${WORKSPACE}"
+                        //sh "cd ${WORKSPACE}"
                         sh "./mvnw clean verify sonar:sonar -Dsonar.login=sqa_3af6559cb970551de0956a209e5a7bc07e6dbd5e"
                     }
                 }
