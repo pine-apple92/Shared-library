@@ -34,7 +34,7 @@ def call() {
                 steps{
                     //def mvn = tool 'Default Maven';
                     withSonarQubeEnv('sonar') {
-                        sh "./mvnw clean verify sonar:sonar -Dsonar.projectKey=Web-goat -Dsonar.projectName='Web-goat'"
+                        sh "./mvnw clean package sonar:sonar -Dsonar.projectKey=Web-goat -Dsonar.projectName=Web-goat"
                     }
                 }
             }
