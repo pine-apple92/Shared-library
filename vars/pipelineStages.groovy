@@ -33,15 +33,15 @@ def call() {
             stage('SonarQube Analysis') {
                 steps{
                     //def mvn = tool 'Default Maven';
-                    dir("${WORKSPACE}"){
+                    
                     // Run SonarQube analysis for Python
-                        script {
-                            def scannerHome = tool name: 'sonar', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
-                            withSonarQubeEnv(credentialsId:"sonarqube",installationName:'sonar') {
-                                sh "${scannerHome}/bin/sonar-scanner"
-                            }
+                    script {
+                        def scannerHome = tool name: 'sonar', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
+                        withSonarQubeEnv(credentialsId:"sonarqube",installationName:'sonar') {
+                            sh "${scannerHome}/bin/sonar-scanner"
                         }
                     }
+                    
                 }
             }
         }
