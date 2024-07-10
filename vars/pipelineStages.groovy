@@ -33,10 +33,16 @@ def call() {
             stage('SonarQube Analysis') {
                 steps{
                     //def mvn = tool 'Default Maven';
-                    withSonarQubeEnv('sonar') {
-                        //sh "cd ${WORKSPACE}"
-                        sh "./mvnw clean verify sonar:sonar -Dsonar.projectKey=Web-goat -Dsonar.login=sqa_3af6559cb970551de0956a209e5a7bc07e6dbd5e -Dsonar.sources=."
-                    }
+                    dir("${WORKSPACE}"){
+                    // Run SonarQube analysis for Python
+                    script {
+                        def scannerHome = tool name: 'sonar', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
+                        withSonarQubeEnv('sonar') {
+                            sh "${scannerHome}/bin/sonar-scanner \
+                                -D sonar.projectKey=Web-goat \
+                                -D sonar.host.url=http://172.17.0.4:9000 \
+                                -D sonar.login=sqa_3af6559cb970551de0956a209e5a7bc07e6dbd5e"
+                        }
                 }
             }
         }
