@@ -41,7 +41,7 @@ def call() {
                     withSonarQubeEnv(credentialsId:"sonarqube",installationName:'sonar') {
                             //sh "${scannerHome}/bin/sonar-scanner"
                         sh "${scannerHome}/bin/sonar-scanner \
-                                        -Dsonar.projectKey=Web-goat \
+                                        -Dsonar.projectKey=${env.REPO_NAME} \
                                         -Dsonar.java.binaries=. \
                                         -Dsonar.projectBaseDir=${WORKSPACE}"
                     }
