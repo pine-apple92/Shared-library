@@ -40,7 +40,10 @@ def call() {
                     // Run SonarQube analysis for Python
                     withSonarQubeEnv(credentialsId:"sonarqube",installationName:'sonar') {
                             //sh "${scannerHome}/bin/sonar-scanner"
-                        sh "${scannerHome}/bin/sonar-scanner -X"
+                        sh "${scannerHome}/bin/sonar-scanner \
+                                        -Dsonar.projectKey=Web-goat \
+                                        -Dsonar.java.binaries=. \
+                                        -Dsonar.projectBaseDir=${WORKSPACE}"
                     }
                     
                 }
