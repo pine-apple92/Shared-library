@@ -31,13 +31,7 @@ def call() {
             }
 
             stage('SonarQube Analysis') {
-                environment{
-                    scannerHome = tool 'sonar'
-                }
                 steps{
-                    //def mvn = tool 'Default Maven';
-                    
-                    // Run SonarQube analysis for Python
                     withSonarQubeEnv(credentialsId:"sonarqube",installationName:'sonar') {
                             //sh "${scannerHome}/bin/sonar-scanner"
                         sh "${scannerHome}/bin/sonar-scanner \
