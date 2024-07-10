@@ -32,10 +32,9 @@ def call() {
 
             stage('SonarQube Analysis') {
                 steps{
-                    def workspace = env.WORKSPACE
                     //def mvn = tool 'Default Maven';
                     withSonarQubeEnv('sonar') {
-                        sh "cd ${workspace}"
+                        sh "cd ${WORKSPACE}"
                         sh "./mvnw sonar:sonar"
                     }
                 }
