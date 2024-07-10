@@ -33,7 +33,8 @@ def call() {
             stage('SonarQube Analysis') {
                 steps{
                     //def mvn = tool 'Default Maven';
-                    withSonarQubeEnv(installationName:'sonar') {
+                    withSonarQubeEnv('sonar') {
+                        sh "cd \$\{WORKSPACE\}"
                         sh "./mvnw sonar:sonar"
                     }
                 }
