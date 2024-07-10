@@ -38,12 +38,14 @@ def call() {
                         script {
                             def scannerHome = tool name: 'sonar', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
                             withSonarQubeEnv('sonar') {
-                                sh "${scannerHome}/bin/sonar-scanner \
-                                    -Dsonar.projectKey=Web-goat \
-                                    -Dsonar.host.url=http://172.17.0.4:9000 \
-                                    -Dsonar.login=sqa_3af6559cb970551de0956a209e5a7bc07e6dbd5e \
-                                    -Dsonar.java.binaries=. \
-                                    -Dsonar.projectBaseDir=${WORKSPACE}"
+                                withCredentials([string(credentialsId: 'sonarqube', variable: 'SONAR_TOKEN')]) {
+                                    sh "${scannerHome}/bin/sonar-scanner \
+                                        -Dsonar.projectKey=Web-goat \
+                                        -Dsonar.host.url=http://172.17.0.4:9000 \
+                                        -Dsonar.login=${env.SONAR_TOKEN} \
+                                        -Dsonar.java.binaries=. \
+                                        -Dsonar.projectBaseDir=${WORKSPACE}"
+                                }
                             }
                         }
                     }
