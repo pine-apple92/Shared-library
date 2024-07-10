@@ -41,8 +41,7 @@ def call() {
                                 withCredentials([string(credentialsId: 'sonarqube', variable: 'SONAR_TOKEN')]) {
                                     sh "${scannerHome}/bin/sonar-scanner \
                                         -Dsonar.projectKey=Web-goat \
-                                        -Dsonar.host.url=http://172.17.0.4:9000 \
-                                        -Dsonar.login=${env.SONAR_TOKEN} \
+                                        -Dsonar.host.url=http://172.17.0.4:9000 ${env.SONAR_TOKEN} \
                                         -Dsonar.java.binaries=. \
                                         -Dsonar.projectBaseDir=${WORKSPACE}"
                                 }
