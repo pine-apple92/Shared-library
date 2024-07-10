@@ -41,7 +41,9 @@ def call() {
                                 sh "${scannerHome}/bin/sonar-scanner \
                                     -D sonar.projectKey=Web-goat \
                                     -D sonar.host.url=http://172.17.0.4:9000 \
-                                    -D sonar.login=sqa_3af6559cb970551de0956a209e5a7bc07e6dbd5e"
+                                    -D sonar.login=sqa_3af6559cb970551de0956a209e5a7bc07e6dbd5e \
+                                    -Dsonar.java.binaries=. \
+                                    -Dsonar.projectBaseDir=${WORKSPACE}"
                             }
                         }
                     }
