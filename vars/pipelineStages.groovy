@@ -33,8 +33,8 @@ def call() {
             stage('SonarQube Analysis') {
                 steps{
                     //def mvn = tool 'Default Maven';
-                    withSonarQubeEnv(credentialsId: 'sonarqube', installationName:'sonar') {
-                        sh "./mvnw clean package sonar:sonar -Dsonar.projectKey=Web-goat -Dsonar.projectName=Web-goat -Dsonar.login=sqa_3af6559cb970551de0956a209e5a7bc07e6dbd5e"
+                    withSonarQubeEnv(installationName:'sonar') {
+                        sh "./mvnw sonar:sonar"
                     }
                 }
             }
