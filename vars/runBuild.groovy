@@ -1,3 +1,4 @@
+@Grab(group='org.codehaus.groovy', module='groovy-yaml', version='2.4.12')
 import groovy.yaml.YamlSlurper
 
 def call(String yamlFilePath = 'jenkins.yml') {
