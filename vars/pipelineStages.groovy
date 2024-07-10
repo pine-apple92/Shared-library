@@ -38,7 +38,8 @@ def call() {
                     script {
                         def scannerHome = tool name: 'sonar', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
                         withSonarQubeEnv(credentialsId:"sonarqube",installationName:'sonar') {
-                            sh "${scannerHome}/bin/sonar-scanner"
+                            //sh "${scannerHome}/bin/sonar-scanner"
+                            sh "./mvnw package sonar:sonar"
                         }
                     }
                     
