@@ -31,16 +31,13 @@ def call() {
             }
 
             stage('SonarQube Analysis') {
-                steps {
-                    script {
-                        withSonarQubeEnv('SonarQube') { // 'SonarQube'는 Jenkins 설정에서 지정한 SonarQube 서버 이름
-                            def scannerHome = tool 'SonarQube Scanner'
-                            echo "${env.REPO_NAME}"
-                            sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=${env.REPO_NAME} -Dsonar.sources=."
-                        }
+                steps{
+                    withSonarQubeEnv('sonar'){
+                        sh "mvn clean package sonar:sonar -Dsonar.projectKey=Web-goat -Dsonar.projectName='Web-goat'"
                     }
                 }
             }
+            sh "echo \${env.REPO_NAME}"
         }
     }
 }
