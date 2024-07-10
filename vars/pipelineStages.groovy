@@ -31,6 +31,9 @@ def call() {
             }
 
             stage('SonarQube Analysis') {
+                environment{
+                    scannerHome = tool 'sonar'
+                }
                 steps{
                     withSonarQubeEnv(credentialsId:"sonarqube",installationName:'sonar') {
                             //sh "${scannerHome}/bin/sonar-scanner"
