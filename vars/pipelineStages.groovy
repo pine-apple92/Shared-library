@@ -35,6 +35,7 @@ def call() {
                     script {
                         withSonarQubeEnv('SonarQube') { // 'SonarQube'는 Jenkins 설정에서 지정한 SonarQube 서버 이름
                             def scannerHome = tool 'SonarQube Scanner'
+                            echo "${env.REPO_NAME}"
                             sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=${env.REPO_NAME} -Dsonar.sources=."
                         }
                     }
