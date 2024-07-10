@@ -37,9 +37,8 @@ def call() {
                     // Run SonarQube analysis for Python
                         script {
                             def scannerHome = tool name: 'sonar', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
-                            withSonarQubeEnv('sonar') {
-                                withCredentials([string(credentialsId: 'sonarqube', variable: 'SONAR_TOKEN')]) {
-                                    sh "./mvnw clean verify sonar:sonar -Dsonar.projectName=Web-goat -Dsonar.java.binaries=. -Dsonar.host.url=http://172.17.0.4:9000 -Dsonar.login=${env.SONAR_TOKEN} "
+                            withSonarQubeEnv(credentialsId:"sonarqube",installationName:'sonar') {
+                                sh "${scannerHome}/bin/sonar-scanner"
                             }
                         }
                     }
