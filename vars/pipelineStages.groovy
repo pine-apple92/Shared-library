@@ -31,16 +31,16 @@ def call() {
             }
 
             stage('SonarQube Analysis') {
+                environment{
+                    scannerHome = tool 'sonar'
+                }
                 steps{
                     //def mvn = tool 'Default Maven';
                     
                     // Run SonarQube analysis for Python
-                    script {
-                        def scannerHome = tool name: 'sonar', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
-                        withSonarQubeEnv(credentialsId:"sonarqube",installationName:'sonar') {
+                    withSonarQubeEnv(credentialsId:"sonarqube",installationName:'sonar') {
                             //sh "${scannerHome}/bin/sonar-scanner"
-                            sh "./mvnw package sonar:sonar"
-                        }
+                        sh "${scannerHome}/bin/sonar-scanner -X"
                     }
                     
                 }
