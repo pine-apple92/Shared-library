@@ -3,7 +3,7 @@ def call() {
         agent any
 
         environment {
-            URL = scm.getUserRemoteConfigs()[0].getUrl()
+            def URL = scm.getUserRemoteConfigs()[0].getUrl()
             REPO_NAME = getRepoName()
         }
 
