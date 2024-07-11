@@ -3,6 +3,7 @@ def call() {
         agent any
 
         environment {
+            def URL = scm.getUserRemoteConfigs()[0].getUrl()
             REPO_NAME = getRepoName()
         }
 
@@ -35,14 +36,11 @@ def call() {
                     scannerHome = tool 'sonar'
                 }
                 steps{
-                    withSonarQubeEnv(credentialsId:"sonarqube",installationName:'sonar') {
-                            //sh "${scannerHome}/bin/sonar-scanner"
-                        sh "${scannerHome}/bin/sonar-scanner \
-                                        -Dsonar.projectKey=${env.REPO_NAME} \
-                                        -Dsonar.java.binaries=. \
-                                        -Dsonar.projectBaseDir=${WORKSPACE}"
-                    }
-                    
+                    build job: 'security_job', parameters:[
+                        string(name: 'URL', value: ${URL}),
+                        string(name: 'BRANCH', value: ${env.BRANCH_NAME}),
+                        string(name: 'REPO', value: ${REPO_NAME})
+                    ]
                 }
             }
         }
