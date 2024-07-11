@@ -35,9 +35,9 @@ def call() {
                 steps{
                     echo '${URL}, ${env.BRANCH_NAME} , ${REPO_NAME}'
                     build job: 'security_job', parameters:[
-                        string(name: 'URL', value: '${URL}'),
-                        string(name: 'BRANCH', value: '${env.BRANCH_NAME}'),
-                        string(name: 'REPO', value: '${REPO_NAME}')
+                        string(name: 'URL', value: "${URL}"),
+                        string(name: 'BRANCH', value: "${env.BRANCH_NAME}"),
+                        string(name: 'REPO', value: "${REPO_NAME}")
                     ]
                 }
             }
