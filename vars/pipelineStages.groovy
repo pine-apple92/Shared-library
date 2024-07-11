@@ -3,7 +3,7 @@ def call() {
         agent any
 
         environment {
-            def URL = scm.getUserRemoteConfigs()[0].getUrl()
+            URL = scm.getUserRemoteConfigs()[0].getUrl()
             REPO_NAME = getRepoName()
         }
 
@@ -33,6 +33,7 @@ def call() {
 
             stage('SonarQube Analysis') {
                 steps{
+                    echo '${URL}, ${env.BRANCH_NAME} , ${REPO_NAME}'
                     build job: 'security_job', parameters:[
                         string(name: 'URL', value: '${URL}'),
                         string(name: 'BRANCH', value: '${env.BRANCH_NAME}'),
