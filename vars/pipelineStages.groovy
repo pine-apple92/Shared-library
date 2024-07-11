@@ -35,7 +35,7 @@ def call() {
                     script{
                         def URL = env.GIT_URL
                         def BRANCH = env.GIT_BRANCH
-                        echo "${URL}, ${BRANCH} , ${REPO_NAME}"
+
                         build job: 'security_job', parameters:[
                             string(name: 'URL', value: URL),
                             string(name: 'BRANCH', value: BRANCH),
