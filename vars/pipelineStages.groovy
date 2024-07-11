@@ -33,7 +33,7 @@ def call() {
 
             stage('SonarQube Analysis') {
                 steps{
-                    echo '${URL}, ${env.BRANCH_NAME} , ${REPO_NAME}'
+                    echo "${URL}, ${env.BRANCH_NAME} , ${REPO_NAME}"
                     build job: 'security_job', parameters:[
                         string(name: 'URL', value: "${URL}"),
                         string(name: 'BRANCH', value: "${env.BRANCH_NAME}"),
