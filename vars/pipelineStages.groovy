@@ -33,9 +33,9 @@ def call() {
             stage('SonarQube Analysis') {
                 steps{
                     script{
-                        def URL = env.BUILD_URL
+                        def URL = env.GIT_URL
                         def BRANCH = env.GIT_BRANCH
-                        echo "${URL}, ${env.BRANCH_NAME} , ${REPO_NAME}"
+                        echo "${URL}, ${BRANCH} , ${REPO_NAME}"
                         build job: 'security_job', parameters:[
                             string(name: 'URL', value: URL),
                             string(name: 'BRANCH', value: BRANCH),
