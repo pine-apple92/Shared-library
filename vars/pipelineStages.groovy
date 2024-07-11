@@ -32,14 +32,11 @@ def call() {
             }
 
             stage('SonarQube Analysis') {
-                environment{
-                    scannerHome = tool 'sonar'
-                }
                 steps{
                     build job: 'security_job', parameters:[
-                        string(name: 'URL', value: ${URL}),
-                        string(name: 'BRANCH', value: ${env.BRANCH_NAME}),
-                        string(name: 'REPO', value: ${REPO_NAME})
+                        string(name: 'URL', value: '${URL}'),
+                        string(name: 'BRANCH', value: '${env.BRANCH_NAME}'),
+                        string(name: 'REPO', value: '${REPO_NAME}')
                     ]
                 }
             }
