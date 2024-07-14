@@ -40,7 +40,7 @@ def call() {
                             string(name: 'GIT_URL', value: URL),
                             string(name: 'BRANCH', value: BRANCH),
                             string(name: 'REPONAME', value: REPO_NAME)
-                        ]
+                        ], wait: false
                     }
                 }
             }
