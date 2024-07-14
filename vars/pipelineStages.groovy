@@ -29,21 +29,6 @@ def call() {
                     //sh './deploy.sh'
                 }
             }
-
-            stage('SonarQube Analysis') {
-                steps{
-                    script{
-                        def URL = env.GIT_URL
-                        def BRANCH = env.GIT_BRANCH
-
-                        build job: 'security_job', parameters:[
-                            string(name: 'URL', value: URL),
-                            string(name: 'BRANCH', value: BRANCH),
-                            string(name: 'REPO', value: REPO_NAME)
-                        ]
-                    }
-                }
-            }
         }
     }
 }
