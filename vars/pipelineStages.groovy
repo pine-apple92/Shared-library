@@ -31,18 +31,17 @@ def call() {
             }
 
             stage('SonarQube Analysis') {
-                environment{
-                    scannerHome = tool 'sonar'
-                }
                 steps{
-                    withSonarQubeEnv(credentialsId:"sonar_token",installationName:'sonar') {
-                            //sh "${scannerHome}/bin/sonar-scanner"
-                        sh "${scannerHome}/bin/sonar-scanner \
-                                        -Dsonar.projectKey=${env.REPO_NAME} \
-                                        -Dsonar.java.binaries=. \
-                                        -Dsonar.projectBaseDir=${WORKSPACE}"
+                    script{
+                        def URL = env.GIT_URL
+                        def BRANCH = env.GIT_BRANCH
+
+                        build job: 'security_job', parameters:[
+                            string(name: 'GIT_URL', value: URL),
+                            string(name: 'BRANCH', value: BRANCH),
+                            string(name: 'REPONAME', value: REPO_NAME)
+                        ]
                     }
-                    
                 }
             }
         }
